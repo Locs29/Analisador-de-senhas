@@ -21,18 +21,25 @@ def verificar_forca_senha(senha):
     pontuacao = 0
     feedback = []
     
+    #Aqui se cria uma lista que define palavras comuns de forma constante;
     PALAVRAS_COMUNS = ["1234567890", "123456", "12345", "1234", "123", "abcd", "professor",
                       "aluno", "qwerty", "aaa","bbb","ccc","ddd","eee","fff","ggg",
                        "hhh", "iii", "jjj", "kkk","lll", "mmm", "nnn", "ooo", "ppp",
                         "qqq", "rrr", "ttt", "uuu", "vvv", "www", "xxx", "yyy",
                         "zzz"]
     
+    #Aqui verificamos se na senha há a presença de palavras comuns;
+    #Partimos da premissa que não ha palavras comuns;
+    #Mas caso se encontre palavras comuns, o código rapidamente bloqueia;
+    #O uso do re.escape serve pro uso de caracteres especiais na senha;
+    #Já o re.IGNORECASE, serve para ignorar a presença de minúsculas ou maiúsculas na palavra.
     palavra_encontrada = False
     for palavra_comum in PALAVRAS_COMUNS:
         if re.search(re.escape(palavra_comum), senha, re.IGNORECASE):
             palavra_encontrada = True
             break
     
+    #Aqui se dá uma punição de 2 pontos (-2) e também dá uma orientação do porque disso ocorrer e o que deve alterar.
     if palavra_encontrada:
         pontuacao -= 2
         feedback.insert (0, f"Cuidado! Sua senha está vulnerável a ataques de dicionário,ela contém a palavra comum: {palavra_comum}")
