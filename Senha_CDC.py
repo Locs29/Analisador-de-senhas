@@ -22,7 +22,7 @@ def verificar_forca_senha(senha):
     feedback = []
     
     #Aqui se cria uma lista que define palavras comuns de forma constante;
-    PALAVRAS_COMUNS = ["1234567890", "123456", "12345", "1234", "123", "abcd", "professor",
+    PALAVRAS_COMUNS = [ "123", "234", "345", "456", "567","678", "789", "890", "abc", "professor",
                       "aluno", "qwerty", "aaa","bbb","ccc","ddd","eee","fff","ggg",
                        "hhh", "iii", "jjj", "kkk","lll", "mmm", "nnn", "ooo", "ppp",
                         "qqq", "rrr", "ttt", "uuu", "vvv", "www", "xxx", "yyy",
@@ -112,10 +112,16 @@ def verificar_forca_senha(senha):
     elif pontuacao >= 4:
         forca = 'Média'
         mensagem = "Sua senha é considerada Média. Ela atende aos requisitos básicos, buque a melhorar (ex: use 12+ caracteres)."
-    else:
+    elif pontuacao < 0:
+        forca = '???'
+        mensagem = "Como... você fez isso? Transcendeu a matéria!"
+    elif pontuacao == 0:
+        forca = '???'
+        mensagem = "Haha, engraçadinho! Tentando quebrar as regras..."
+    elif pontuacao <= 3:
         forca = 'Fraca'
         mensagem = "ATENÇÃO: Sua senha é Fraca. Ela falha nos critérios de segurança essenciais, busque urgentemente altera-lá"
-
+    
    #Depois do registro da pontuação, aqui mostra na tela a pontuação;
     feedback.insert(0, f"| Pontuação Total: {pontuacao}/6 | Classificação: {forca} |")
     feedback.insert(1, "=" * 47)
